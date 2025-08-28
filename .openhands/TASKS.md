@@ -1,27 +1,25 @@
 # Task List
 
-1. ✅ Phase 0: Legal guardrails and compliance verification
-✅ Confirmed no agar.io references, original orbital energy mechanics, strict TypeScript
-2. ✅ Phase 1: Monorepo scaffold with Turborepo
-✅ COMPLETED: Full monorepo structure, 4 workspaces, Docker config, build system working, legal compliance verified, code pushed to GitHub
-3. ✅ Phase 2: Complete shared types and network protocols
-✅ COMPLETED: Comprehensive type system with 6 modules - constants, game, network, player, events, errors. 200+ types with strict Zod validation, physics types, network protocols, event system, error handling. All builds passing.
-4. ⏳ Phase 3: Server physics engine and tick loop
-Implement game loop, collision detection, orbital mechanics, state management
-5. ⏳ Phase 4: Client rendering and input handling
-Canvas/WebGL rendering, input system, client-side prediction, server reconciliation
-6. ⏳ Phase 5: Role-based abilities (Runner, Bulwark, Tactician)
-Implement unique abilities for each player role
-7. ⏳ Phase 6: Power-up system implementation
-Overdrive, Magnet Surge, Phase Shift, Orbit Split abilities
-8. ⏳ Phase 7: Prism Yard map with reflective walls
-Hexagonal arena with 60° reflective crystal walls
-9. ⏳ Phase 8: UI/UX and branding polish
-Complete HUD, menus, neon effects, audio integration
-10. ⏳ Phase 9: Matchmaking and region selection
-Lobby system, room management, region-based servers
-11. ⏳ Phase 10: QA testing and deployment scripts
-Unit tests, integration tests, CI/CD, production deployment
-12. ⏳ Phase 11: Legal compliance audit
-Final review to ensure no agar.io similarities, trademark compliance
+1. ✅ Explore repository structure and docs (DEVELOPMENT_HANDOFF.md, PHASE_3_ROADMAP.md)
+
+2. ⏳ Install dependencies and run baseline build/type-check
+Ready to run: npm ci; npm run build; npm run type-check
+3. ✅ Review packages/types to align server physics with shared types
+Aligned to constants and body ideas; using Vector2 vs zod Vector2 from types for runtime perf.
+4. ✅ Implement apps/server/src/physics/Vector2.ts with unit tests
+
+5. 🔄 Implement apps/server/src/physics/Physics.ts (integration, collisions, orbit) with tests
+Basic physics done; still need orbit mechanics + tests later.
+6. ✅ Implement entity classes: Player.ts and EnergyShard.ts
+
+7. 🔄 Wire GameLoop with Socket.IO (join_game, player_input, tick broadcast)
+Players created on join; input applied; tick broadcast of minimal state via 'state' event.
+8. 🔄 Set up Jest testing for server package and run tests
+jest.config.js added; initial tests added (vector2, physics, entities, gameloop).
+9. ⏳ Run lint and type-check, fix issues
+
+10. ⏳ Smoke run server (dev or unified) to ensure startup not broken
+
+11. ⏳ Create feature branch, commit Phase 3 server work, push to GitHub, open PR
+Branch from default (main/master). Use description aligned to Phase 3 scope.
 
