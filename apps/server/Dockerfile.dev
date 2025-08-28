@@ -1,0 +1,22 @@
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+COPY turbo.json ./
+COPY apps/server/package*.json ./apps/server/
+COPY packages/types/package*.json ./packages/types/
+
+# Install dependencies
+RUN npm install
+
+# Copy source code
+COPY . .
+
+# Build shared packages
+RUN npm run build --workspace=@orbmania/types
+
+EXPOSE 12001
+
+CMD ["npm", "run", "dev", "--workspace=@orbmania/server"]
