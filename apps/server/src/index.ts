@@ -5,7 +5,7 @@ import express from 'express';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 import cors from 'cors';
-import { GAME_CONSTANTS } from '@orbmania/types';
+import { PHYSICS_CONSTANTS, BALANCE_CONSTANTS } from '@orbmania/types';
 
 const app = express();
 const httpServer = createServer(app);
@@ -69,8 +69,8 @@ io.on('connection', (socket) => {
       playerId: socket.id,
       gameState: {
         // Minimal state for now
-        arena: GAME_CONSTANTS.ARENA_SIZE,
-        tickRate: GAME_CONSTANTS.TICK_RATE
+        arena: { width: PHYSICS_CONSTANTS.ARENA_WIDTH, height: PHYSICS_CONSTANTS.ARENA_HEIGHT },
+        tickRate: PHYSICS_CONSTANTS.TICK_RATE
       }
     });
   });
@@ -88,7 +88,7 @@ io.on('connection', (socket) => {
 });
 
 // Game loop placeholder - 30 Hz tick rate
-const TICK_INTERVAL = 1000 / GAME_CONSTANTS.TICK_RATE;
+const TICK_INTERVAL = 1000 / PHYSICS_CONSTANTS.TICK_RATE;
 let lastTick = Date.now();
 
 function gameLoop() {
@@ -111,9 +111,9 @@ const PORT = Number(process.env.PORT) || 12001;
 
 httpServer.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Orbmania.io Server running on port ${PORT}`);
-  console.log(`📊 Tick rate: ${GAME_CONSTANTS.TICK_RATE} Hz`);
-  console.log(`🎮 Max players: ${GAME_CONSTANTS.MAX_PLAYERS}`);
-  console.log(`🗺️  Arena size: ${GAME_CONSTANTS.ARENA_SIZE.width}x${GAME_CONSTANTS.ARENA_SIZE.height}`);
+  console.log(`📊 Tick rate: ${PHYSICS_CONSTANTS.TICK_RATE} Hz`);
+  console.log(`🎮 Max players per room: 50`);
+  console.log(`🗺️  Arena size: ${PHYSICS_CONSTANTS.ARENA_WIDTH}x${PHYSICS_CONSTANTS.ARENA_HEIGHT}`);
   
   // Start game loop
   gameLoop();
